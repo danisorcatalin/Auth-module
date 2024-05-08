@@ -1,0 +1,43 @@
+{
+  "name": "viofood",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@next-auth/prisma-adapter": "^1.0.7",
+    "@prisma/client": "^5.7.0",
+    "axios": "^1.6.3",
+    "bcrypt": "^5.1.1",
+    "framer-motion": "^10.16.16",
+    "lodash": "^4.17.21",
+    "next": "14.0.4",
+    "node": "18.17",
+    "oxlint": "^0.1.2",
+    "prettier-plugin-tailwindcss": "^0.5.9",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
+    "react-loader-spinner": "^6.1.0",
+    "react-phone-input-2": "^2.15.1",
+    "react-select": "^5.8.0",
+    "sharp": "^0.33.3",
+    "uuid": "^9.0.1",
+    "uuidv4": "^6.2.13"
+  },
+  "devDependencies": {
+    "@types/node": "20.10.4",
+    "@types/react": "18.2.43",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "next-auth": "^4.24.5",
+    "postcss": "^8",
+    "prisma": "^5.7.0",
+    "tailwindcss": "^3.3.0"
+  }
+}
