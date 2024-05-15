@@ -4,12 +4,10 @@ import React, { useState } from 'react';
 import { InfinitySpin } from 'react-loader-spinner';
 import { Toaster } from 'react-hot-toast';
 import { useMenu } from '@/hooks/useMenu';
-import { useCart } from '@/hooks/useCart';
 import { useProfile } from '@/hooks/useProfile';
 
 export const UserDataContext = React.createContext(null);
 export const MenuContext = React.createContext(null);
-export const CartContext = React.createContext(null);
 export const ModalContext = React.createContext(null);
 
 export function AppProvider({ children }) {
@@ -17,10 +15,8 @@ export function AppProvider({ children }) {
         <SessionProvider>
             <DBDataProvider>
                 <ModalProvider>
-                    <CartProvider>
                         <Toaster />
                         {children}
-                    </CartProvider>
                 </ModalProvider>
             </DBDataProvider>
         </SessionProvider>
@@ -86,38 +82,8 @@ function DBDataProvider({ children }) {
     );
 }
 
-function CartProvider({ children }) {
-    const session = useSession();
-    const {
-        userCart,
-        addToCart,
-        deleteFromCart,
-        decreaseAmount,
-        increaseAmount,
-        proceedOrder,
-        fetching
-    } = useCart(session.data?.user);
-
-    return (
-        <CartContext.Provider
-            value={{
-                userCart,
-                addToCart,
-                decreaseAmount,
-                deleteFromCart,
-                increaseAmount,
-                proceedOrder,
-                fetching
-            }}
-        >
-            {children}
-        </CartContext.Provider>
-    );
-}
-
 function ModalProvider({ children }) {
     const [menuItemModal, setMenuItemModal] = useState(false);
-    const [cartModal, setCartModal] = useState(false);
     const openMenuItemModal = (menuItem) => {
         setMenuItemModal(menuItem);
     };
@@ -125,9 +91,6 @@ function ModalProvider({ children }) {
         setMenuItemModal(false);
     };
 
-    const toggleCartModal = (option) => {
-        setCartModal(option);
-    };
 
     return (
         <ModalContext.Provider
@@ -135,8 +98,6 @@ function ModalProvider({ children }) {
                 openMenuItemModal,
                 closeMenuItemModal,
                 menuItemModal,
-                cartModal,
-                toggleCartModal
             }}
         >
             {children}

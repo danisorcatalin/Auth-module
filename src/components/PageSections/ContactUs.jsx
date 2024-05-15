@@ -5,7 +5,7 @@ export default function ContactUs() {
     return (
         <section className="my-8 text-center">
             <SectionHeader
-                subHeader={"Dont't hesitate"}
+                subHeader={"Don't hesitate"}
                 mainHeader={'Contact us'}
             />
             <div className="mt-8">

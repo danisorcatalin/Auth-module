@@ -5,16 +5,18 @@ import GoogleProvider from 'next-auth/providers/google';
 import { PrismaClient } from '@prisma/client';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
+require('dotenv').config();
+
 const prisma = new PrismaClient();
 
 export const authOptions = {
-    secret: process.env.SECRET,
+    secret: process.env.AUTH_SECRET,
     adapter: PrismaAdapter(prisma),
     providers: [
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET
-        }),
+        // GoogleProvider({
+        //     clientId: process.env.GOOGLE_CLIENT_ID,
+        //     clientSecret: process.env.GOOGLE_CLIENT_SECRET
+        // }),
         CredentialsProvider({
             name: 'Credentials',
             id: 'credentials',

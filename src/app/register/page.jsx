@@ -21,7 +21,8 @@ export default function RegisterPage() {
         await customAxios('POST', 'register', setLoading, {
             data: { email, password, passwordMatch },
             actionOnSuccess: () => {
-                router.push('/login');
+                router.push(
+                    '/validate/'+email);
             },
             loadingString: 'Loading...',
             successString: 'Registration Success!'

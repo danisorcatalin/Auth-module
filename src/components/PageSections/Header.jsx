@@ -7,34 +7,12 @@ import Button from '../UI/Buttons/Button';
 import Icon from '../icon/Icon';
 import MobileModal from '@/components/Modal/MobileModal';
 import {
-    CartContext,
-    ModalContext,
     UserDataContext
 } from '@/context/AppContext';
 
 export default function Header() {
     const [sidebar, setSidebar] = useState(false);
-    const { toggleCartModal } = useContext(ModalContext);
-
     const { userData, session } = useContext(UserDataContext);
-    const { userCart } = useContext(CartContext);
-
-    const CartLink = () => {
-        return (
-            <div
-                onClick={() => toggleCartModal(true)}
-                className={
-                    'shoppingCart cursor-pointer transition-all hover:text-primary'
-                }
-                data-count={userCart.length}
-            >
-                <Icon
-                    icon={'shoppingCart'}
-                    className={'!pointer-events-none'}
-                />
-            </div>
-        );
-    };
 
     return (
         <header className="flex max-h-[6rem] min-h-[6rem] items-center justify-between">
@@ -90,8 +68,6 @@ export default function Header() {
                         </Link>
                     )}
 
-                    <CartLink />
-
                     <Icon onClick={() => setSidebar(true)} icon={'menu'} />
                 </div>
             </nav>
@@ -126,7 +102,6 @@ export default function Header() {
                             Logout
                         </Button>
 
-                        <CartLink />
                     </>
                 )}
             </nav>

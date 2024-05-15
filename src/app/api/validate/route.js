@@ -3,46 +3,37 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import { NextResponse } from 'next/server';
-import {randomUUID} from "crypto";
+import {random} from "lodash";
 
 const prisma = new PrismaClient();
 
 export async function POST(req) {
     const body = await req.json();
-    const { email } = body;
+    const {email, code } = body;
 
-    if (!email) {
+    if (!code || !email) {
         return NextResponse.json(
-            { error: 'Missing email on password recovery!' },
+            { error: 'Missing validation Code or email!' },
             { status: 400 }
         );
     }
 
-    if (!email?.length) {
-        return NextResponse.json(
-            { error: 'Missing email on password recovery!' },
-            { status: 400 }
-        );
-    }
     try {
-        const exists = await prisma.user.findUnique({
+        let exists = await prisma.user.findUnique({
             where: { email: email }
         });
 
         if (!exists) {
             return NextResponse.json(
-                { error: 'Error occurred! User does not exist' },
+                { error: 'Error occurred!' },
                 { status: 400 }
             );
         }
 
-        let password = randomUUID();
-
-        //TODO send email wit password so he can recover it
-
-        const hashedPassword = await bcrypt.hash(password, 10);
+        let emailVerified = exists.verificationCode === code ;
         const user = await prisma.user.update({
-            data: { email: email, hashedPassword }
+            where: { email: email },
+            data: { email: email, emailVerified}
         });
 
         return NextResponse.json(user, { status: 200 });

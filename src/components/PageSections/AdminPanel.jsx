@@ -7,14 +7,11 @@ const AdminPanel = ({ active = 'profile', isAdmin }) => {
     const links = isAdmin
         ? [
               { path: 'profile', icon: 'profile' },
-              { path: 'categories', icon: 'tag' },
               { path: 'menu-items', icon: 'cake' },
               { path: 'users', icon: 'users' },
-              { path: 'orders', icon: 'shop' }
           ]
         : [
-              { path: 'profile', icon: 'profile' },
-              { path: 'orders', icon: 'shop' }
+              { path: 'profile', icon: 'profile' }
           ];
 
     return (
